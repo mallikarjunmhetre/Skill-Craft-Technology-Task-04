@@ -1,0 +1,241 @@
+/* ═══════════════════════════════════════════════════════════
+   ANIMATIONS CSS — KeyLogger Dashboard
+   ═══════════════════════════════════════════════════════════ */
+/* ─── Keyframe Animations ────────────────────────────────── */
+/* Flicker — matrix/cyber text effect */
+@keyframes flicker {
+  0%, 95%, 100% { opacity: 1; }
+  96%, 99% { opacity: 0.4; }
+}
+/* Glow pulse */
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 10px rgba(0, 212, 255, 0.3); }
+  50%       { box-shadow: 0 0 30px rgba(0, 212, 255, 0.7), 0 0 60px rgba(0, 212, 255, 0.2); }
+}
+/* Scanning line */
+@keyframes scanLine {
+  0%   { top: -2px; }
+  100% { top: 100%; }
+}
+/* Fade in up */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+/* Fade in */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+/* Slide in left */
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-30px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+/* Blink cursor */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+/* Matrix rain drop */
+@keyframes matrixDrop {
+  0%   { transform: translateY(-100%); opacity: 1; }
+  80%  { opacity: 0.8; }
+  100% { transform: translateY(110vh); opacity: 0; }
+}
+/* Counter count-up (just fade in) */
+@keyframes countUp {
+  from { transform: translateY(10px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+/* Rotate */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+/* Neon border pulse */
+@keyframes borderPulse {
+  0%, 100% { border-color: rgba(0, 212, 255, 0.1); }
+  50%       { border-color: rgba(0, 212, 255, 0.5); }
+}
+/* Data stream */
+@keyframes dataStream {
+  0%   { opacity: 0; transform: translateY(-5px); }
+  10%  { opacity: 1; transform: translateY(0); }
+  90%  { opacity: 1; }
+  100% { opacity: 0; transform: translateY(5px); }
+}
+/* ─── Utility Animation Classes ──────────────────────────── */
+.animate-fade-in      { animation: fadeIn 0.5s ease forwards; }
+.animate-fade-in-up   { animation: fadeInUp 0.5s ease forwards; }
+.animate-slide-left   { animation: slideInLeft 0.4s ease forwards; }
+.animate-glow-pulse   { animation: glowPulse 2s ease-in-out infinite; }
+.animate-flicker      { animation: flicker 4s linear infinite; }
+.animate-blink        { animation: blink 1s step-end infinite; }
+.animate-spin         { animation: spin 1s linear infinite; }
+.animate-border-pulse { animation: borderPulse 2s ease-in-out infinite; }
+/* Staggered children */
+.stagger > *:nth-child(1) { animation-delay: 0.05s; }
+.stagger > *:nth-child(2) { animation-delay: 0.10s; }
+.stagger > *:nth-child(3) { animation-delay: 0.15s; }
+.stagger > *:nth-child(4) { animation-delay: 0.20s; }
+.stagger > *:nth-child(5) { animation-delay: 0.25s; }
+/* ─── Matrix Rain Canvas ─────────────────────────────────── */
+#matrix-canvas {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.06;
+}
+/* ─── Hero Animations ────────────────────────────────────── */
+.hero-section {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  margin-bottom: 28px;
+  min-height: 220px;
+  background: linear-gradient(135deg,
+    rgba(0, 30, 60, 0.9),
+    rgba(0, 10, 30, 0.95));
+  border: 1px solid var(--border-dim);
+  display: flex;
+  align-items: center;
+  padding: 40px;
+  animation: fadeInUp 0.6s ease forwards;
+}
+.hero-bg-lines {
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 28px,
+    rgba(0, 212, 255, 0.025) 28px,
+    rgba(0, 212, 255, 0.025) 29px
+  );
+  pointer-events: none;
+}
+.hero-scan-line {
+  position: absolute;
+  left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.5), transparent);
+  animation: scanLine 3s linear infinite;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: rgba(0, 212, 255, 0.08);
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  border-radius: 20px;
+  font-size: 12px;
+  font-family: var(--font-mono);
+  color: var(--neon-cyan);
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+}
+.hero-title {
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 12px;
+  background: linear-gradient(135deg, #ffffff, var(--neon-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.hero-subtitle {
+  font-size: 15px;
+  color: var(--text-secondary);
+  max-width: 480px;
+  line-height: 1.7;
+}
+/* ─── Live Feed Animation ────────────────────────────────── */
+.live-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-family: var(--font-mono);
+  color: var(--neon-red);
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.live-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--neon-red);
+  animation: glowPulse 1.5s ease-in-out infinite;
+}
+/* ─── Key bubble animation ───────────────────────────────── */
+.key-bubble {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  background: rgba(0, 20, 40, 0.8);
+  border: 1px solid var(--border-glow);
+  color: var(--neon-green);
+  animation: countUp 0.2s ease forwards;
+  box-shadow: 0 0 10px rgba(0, 255, 136, 0.15);
+  flex-shrink: 0;
+}
+.key-bubble.special {
+  color: var(--neon-orange);
+  border-color: rgba(255, 140, 0, 0.3);
+  box-shadow: 0 0 10px rgba(255, 140, 0, 0.15);
+}
+/* ─── Chart container ────────────────────────────────────── */
+.chart-container {
+  position: relative;
+  width: 100%;
+}
+/* ─── Skeleton loading ───────────────────────────────────── */
+.skeleton {
+  background: linear-gradient(90deg,
+    rgba(0, 212, 255, 0.05) 25%,
+    rgba(0, 212, 255, 0.1) 50%,
+    rgba(0, 212, 255, 0.05) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--radius-sm);
+}
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+/* ─── Notification toast ─────────────────────────────────── */
+.toast-container {
+  position: fixed;
+  bottom: 24px; right: 24px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none;
+}
+.toast {
+  padding: 14px 20px;
+  background: rgba(5, 25, 55, 0.95);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-dim);
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  animation: fadeInUp 0.3s ease forwards;
+  pointer-events: auto;
+  backdrop-filter: blur(16px);
+  box-shadow: var(--shadow-card);
+  min-width: 280px;
+}
+.toast.success { border-color: rgba(0, 255, 136, 0.3); }
+.toast.error   { border-color: rgba(255, 51, 102, 0.3); }
+.toast.info    { border-color: rgba(0, 212, 255, 0.3); }
